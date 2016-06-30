@@ -265,7 +265,7 @@ impl Miner {
 				let difficulty = *block.block().fields().header.difficulty();
 				let is_new = original_work_hash.map_or(true, |h| block.block().fields().header.hash() != h);
 				sealing_work.push(block);
-				if self.work_poster.is_some() {
+				if self.work_poster.is_some() && is_new {
 					sealing_work.use_last_ref();
 				}
 				(Some((pow_hash, difficulty, number)), is_new)
